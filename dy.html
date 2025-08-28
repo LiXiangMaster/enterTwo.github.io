@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <script>
         // 配置Tailwind自定义颜色
         tailwind.config = {
@@ -63,7 +63,10 @@
                 欧日韩电影/趣闻轶事
             </h1>
 
+
         </header>
+
+
 
         <!-- 主要内容卡片 -->
         <main class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
@@ -88,7 +91,7 @@
                         1.先打开"抖音极速版"(非抖音app)只有极速版才有的私密分享功能，没有的可以在应用商店下载一个
                     </p>
                     <p style=" color: #283aff; font-size: 18px; margin-top: 3dvb;">
-                        2.安装好“抖音极速版”登录后 点击右上角搜索框 🔍 “视频资源仓”关键词会跳转到我的私密作品集页面
+                        2.安装好“抖音极速版”登录后 点击右上角搜索框 🔍 “西瓜大绿棚”关键词会跳转到我的私密作品集页面
                     </p>
 
                     <p style="color: #ff284a;text-align: center;  margin-top: 2dvb;">
@@ -125,14 +128,18 @@
 
         <!-- 相关内容推荐 -->
         <section class="mb-8">
+
             <div class="flex items-center justify-center text-neutral space-x-4">
+
+                <!-- <p>本站总访客数: <span id="busuanzi_value_site_uv"></span> 人</p> -->
                 <span class="flex items-center">
                     <i class="fa fa-eye mr-1"></i>
-                    <span id="view-count">0</span> 次查看
+                    <p> <span id="busuanzi_value_site_uv"></span> 人</p>
+
                 </span>
                 <span class="flex items-center">
-                    <i class="fa fa-calendar mr-1"></i>
-                    发布时间：2025年8月15日
+                    发布时间： <i id="currentDate" class="fa fa-calendar mr-1"></i>
+
                 </span>
             </div>
         </section>
@@ -183,13 +190,21 @@
             const notificationText = document.getElementById('notification-text');
             const notificationIcon = document.getElementById('notification-icon');
 
-            // 初始化点击量 - 从localStorage获取，若无则初始化为0
-            let viewCount = localStorage.getItem('pageViewCount') || 0;
-            // 每次页面加载点击量+1
-            viewCount = parseInt(viewCount) + 1;
-            // 更新显示并保存到localStorage
-            viewCountElement.textContent = viewCount;
-            localStorage.setItem('pageViewCount', viewCount);
+
+            const today = new Date();
+
+            // 提取年、月、日
+            const year = today.getFullYear();
+            // 月份从0开始，所以需要加1
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+
+            // 格式化为YYYY-M-D格式
+            const formattedDate = `${year}-${month}-${day}`;
+
+            // 显示在页面上
+            document.getElementById('currentDate').textContent = formattedDate;
+
 
             // 复制文本内容功能
             copyTextButton.addEventListener('click', function () {
